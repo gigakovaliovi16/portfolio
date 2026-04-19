@@ -1,12 +1,20 @@
 export type CaseStudyCardProps = {
   index: string;
   title: string;
-  problem: string;
+  situation: string;
+  hardestPart: string;
   action: string;
   result: string;
 };
 
-export function CaseStudyCard({ index, title, problem, action, result }: CaseStudyCardProps) {
+export function CaseStudyCard({
+  index,
+  title,
+  situation,
+  hardestPart,
+  action,
+  result,
+}: CaseStudyCardProps) {
   return (
     <article className="case-study-card">
       <span className="case-study-index">§ {index}</span>
@@ -14,8 +22,12 @@ export function CaseStudyCard({ index, title, problem, action, result }: CaseStu
         <h3 className="case-study-title">{title}</h3>
         <dl className="case-study-body">
           <div className="case-study-row">
-            <dt className="case-study-label">Problem</dt>
-            <dd className="case-study-text">{problem}</dd>
+            <dt className="case-study-label">Situation</dt>
+            <dd className="case-study-text">{situation}</dd>
+          </div>
+          <div className="case-study-row">
+            <dt className="case-study-label">Hardest Part</dt>
+            <dd className="case-study-text">{hardestPart}</dd>
           </div>
           <div className="case-study-row">
             <dt className="case-study-label">Approach</dt>

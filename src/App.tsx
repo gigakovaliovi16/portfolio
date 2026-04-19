@@ -9,7 +9,6 @@ import {
 } from 'lucide-react';
 import AetherFlowHero from '@/components/ui/aether-flow-hero';
 import { CaseStudyCard } from '@/components/case-study-card';
-import { ImpactCard } from '@/components/impact-card';
 import { EtoroMark, EvolutionMark, SetantaMark } from '@/components/company-logos';
 import './index.css';
 
@@ -53,47 +52,32 @@ const metrics = [
   { value: '99.98%', label: 'SLA adherence with 1-minute average MTTA' },
   { value: '6→30', label: 'FTE scale across NOC, SOC, and Professional Services' },
   { value: '80%', label: 'Manual triage reduction via AI-assisted routing' },
-  { value: '2,000+', label: 'Monthly tickets managed end-to-end' },
+  { value: '10/12', label: 'P0–P2 events proactively detected (from 1 of 6)' },
   { value: '22%', label: 'MTTR improvement via AI triage' },
 ];
 
 const caseStudies = [
   {
-    title: 'Scaling 24/7 Operations at eToro',
-    problem: 'Reactive incident handling, slow MTTA, unclear escalation ownership.',
-    action: 'Designed and implemented a structured NOC with clear escalation layers and ownership model.',
-    result: 'Reduced MTTA by 93% (17.3 → 1.2 minutes) and increased First Line Resolution from 80% to 98%.',
+    title: 'The eToro MTTA Intervention',
+    situation:
+      'eToro 24/7 operations ran with a 17-minute MTTA across 2,000+ monthly tickets. Customer impact during active trading was measurable; two prior restructures had failed to close the gap.',
+    hardestPart:
+      'Rebuilding the escalation model without breaking production during live trading windows — while hiring 24 new roles across NOC, SOC, and Professional Services in parallel.',
+    action:
+      'Designed tiered escalation layers with explicit ownership at each boundary. Replaced ad-hoc handoffs with on-call rotations and clear authority to pull the alarm.',
+    result:
+      'MTTA 17.3 → 1.2 min (93%). FLR 80% → 98%. The structure now anchors eToro’s global 24/7 platform commitments.',
   },
   {
-    title: 'AI-Assisted Triage Implementation',
-    problem: 'Manual triage overload across 2,000+ monthly tickets.',
-    action: 'Implemented automated categorization and routing using AI-assisted workflows in Jira Service Management.',
-    result: 'Reduced manual workload by 80% and improved MTTR by 22%.',
-  },
-  {
-    title: 'Building L2 Application Support from Zero',
-    problem: 'No structured Tier 2 support; high dependency on engineering.',
-    action: 'Recruited and structured a 10-person L2 team with defined responsibilities and workflows.',
-    result: 'Achieved 99.98% SLA adherence and improved incident resolution speed during peak events.',
-  },
-];
-
-const operationalImpactItems: Array<{ label: string; body: string }> = [
-  {
-    label: 'Availability',
-    body: 'Protected platform availability during peak trading events, minimizing revenue loss exposure.',
-  },
-  {
-    label: 'Retention',
-    body: 'Reduced incident response time, improving customer experience during high-traffic periods.',
-  },
-  {
-    label: 'Efficiency',
-    body: 'Enabled scalable operations without proportional headcount increase through automation and structured process.',
-  },
-  {
-    label: 'Strategy',
-    body: 'Provided leadership with actionable incident and performance insights to support operational strategy decisions.',
+    title: 'AI-Assisted Triage at Regulated Scale',
+    situation:
+      '2,000+ monthly tickets across diverse incident categories. Manual triage was burning out L1 and slowing MTTR during high-traffic trading windows.',
+    hardestPart:
+      'Earning trust from Product and Engineering to hand triage authority to an AI-assisted system in a regulated environment where mis-routing carries audit consequences.',
+    action:
+      'Phased rollout with human-in-loop review, automated categorization tied to Jira Service Management, and a clear audit trail for every routing decision.',
+    result:
+      '80% manual triage reduction. 22% MTTR improvement. No compliance findings tied to routing since launch.',
   },
 ];
 
@@ -103,6 +87,7 @@ const leadershipPrinciples = [
   'I treat incidents as data for improvement, not isolated failures.',
   'I focus on scalability before optimization.',
   'I design operations that can sustain growth without constant intervention.',
+  'I measure operational maturity by how many decisions happen without my involvement.',
 ];
 
 const skillCategories = [
@@ -122,6 +107,16 @@ const skillCategories = [
     title: 'AI & Automation',
     skills: ['AI-Assisted Ticket Routing', 'Automated Categorization', 'Proactive Detection (P0–P2)', 'Log Analysis Automation', 'Operational Reporting'],
   },
+  {
+    title: 'Regulatory & Business Acumen',
+    skills: [
+      'Licensed-Jurisdiction Incident Reporting',
+      'Board-Level Operational Narrative',
+      'Vendor Management',
+      'Ops Budget Ownership',
+      'Partnership with Product, Engineering, Legal',
+    ],
+  },
 ];
 
 const projects = [
@@ -130,17 +125,17 @@ const projects = [
     subtitle: 'Incident Postmortem Platform',
     badge: 'Shipping',
     description:
-      'AI-powered postmortem generation for operations and SRE teams — reduces investigation time, standardizes documentation, and improves incident learning.',
+      'AI-powered postmortem tool for ops and SRE teams. Built from the problem space I lived at eToro — compressing investigation time so learning lands inside the window where it still changes behavior.',
     tags: ['AI', 'Incident Response', 'SRE'],
     href: 'https://opsrift.com',
     hrefLabel: 'opsrift.com',
   },
   {
     title: 'Akamaru',
-    subtitle: 'SaaS Boilerplate, sold commercially',
+    subtitle: 'Commercial SaaS Boilerplate',
     badge: 'Shipped Product',
     description:
-      'Production-ready React + Express + Postgres SaaS boilerplate with Clerk auth, Paddle billing, admin panel, refunds, and audit trails. Rebrand in five minutes, deploy in an hour.',
+      'Designed the architecture, auth flow, billing scaffold, and admin panel. Sold commercially at akamaru.dev; open-source predecessor at mysaas-boilerplate. Built in parallel with ops work — sharpens my product, auth, and deployment context.',
     tags: ['React', 'Express', 'Postgres', 'Clerk', 'Paddle', 'Drizzle'],
     href: 'https://akamaru.dev',
     hrefLabel: 'akamaru.dev',
@@ -189,7 +184,7 @@ function App() {
             index="02"
             label="Experience"
             title="Professional Journey"
-            subtitle="Six years building and scaling operational infrastructure across iGaming and FinTech environments."
+            subtitle="Six years building and scaling operational infrastructure across iGaming and FinTech."
           />
 
           <div className="experience-timeline">
@@ -209,6 +204,9 @@ function App() {
                     <div className="experience-company experience-company-setanta">
                       SetantaSports · iGaming
                     </div>
+                    <div className="experience-company-scale">
+                      Premium sports streaming &amp; betting · high-traffic broadcast
+                    </div>
                   </div>
                 </div>
                 <div className="experience-meta">
@@ -224,11 +222,23 @@ function App() {
                 Concurrent appointment alongside Webiz · eToro
               </p>
               <ul className="experience-highlights">
-                <li>Built the Application Support function from zero — no dedicated L2 structure existed prior. Recruited and structured a 10-person Tier 2 team.</li>
-                <li>Achieved 99.98% SLA adherence with a 1-minute average MTTA against a 5-minute target — safeguarding platform availability during high-traffic streaming and betting events.</li>
-                <li>Implemented AI-assisted triage in Jira Service Management across 2,000+ monthly cases, reducing MTTR by 22%.</li>
-                <li>Led root cause investigations using AWS monitoring and log analysis, coordinating with Engineering to implement permanent fixes.</li>
-                <li>Partnered with Product and DevOps leadership to prioritize technical issues by business impact — ensuring platform stability during high-traffic events.</li>
+                <li>
+                  Built the Application Support function from scratch at a streaming platform with no
+                  prior L2 structure — recruited and shaped a 10-person Tier 2 team from zero.
+                </li>
+                <li>
+                  Held <strong>99.98% SLA</strong> with a 1-minute average MTTA against a 5-minute
+                  target, safeguarding platform availability through peak streaming and betting
+                  events.
+                </li>
+                <li>
+                  Owned the AI-assisted triage rollout in Jira Service Management across 2,000+
+                  monthly cases — cutting MTTR by <strong>22%</strong>.
+                </li>
+                <li>
+                  Partnered with Product and DevOps leadership to prioritize operational risk by
+                  business impact during high-traffic windows.
+                </li>
               </ul>
             </motion.article>
 
@@ -250,6 +260,9 @@ function App() {
                     <div className="experience-company experience-company-etoro">
                       eToro · Webiz International
                     </div>
+                    <div className="experience-company-scale">
+                      Listed social trading platform · global consumer FinTech
+                    </div>
                   </div>
                 </div>
                 <div className="experience-meta">
@@ -262,16 +275,30 @@ function App() {
                 </div>
               </div>
               <p className="experience-note">
-                Promoted from Operations Center Manager to Operational Excellence Manager, October 2024
+                Promoted from Operations Center Manager to Operational Excellence Manager, October
+                2024
               </p>
               <ul className="experience-highlights">
-                <li>Reduced MTTA by 93% (17.3 → 1.2 minutes) and improved First Line Resolution from 80% to 98% across 2,000+ monthly tickets — significantly reducing customer-impacting downtime during peak trading activity.</li>
-                <li>Designed and scaled a 24/7 operations organization from 6 to 30 FTE across NOC, SOC, and Professional Services — establishing clear escalation layers and operational ownership at each tier.</li>
-                <li>Shifted incident management from reactive to proactive detection — improving P0–P2 proactive detection from 1 in 6 to 10 in 12 events.</li>
-                <li>Implemented AI-assisted ticket routing and automated categorization, reducing manual triage workload by 80%.</li>
-                <li>Designed and delivered internal bootcamps to develop monitoring, security, and compliance specialists — eliminating external hiring dependency.</li>
-                <li>Established escalation frameworks, staffing models, and process infrastructure sustaining 99.95%+ SLA adherence — providing the foundation for eToro's global 24/7 platform commitments.</li>
-                <li>Reported operational performance, incident trends, and team metrics to senior leadership — contributing to operational strategy discussions and platform reliability planning.</li>
+                <li>
+                  Cut MTTA <strong>93%</strong> (17.3 → 1.2 min) and lifted First Line Resolution
+                  from 80% to 98% across 2,000+ monthly tickets — materially reducing
+                  customer-facing downtime during peak trading.
+                </li>
+                <li>
+                  Scaled the 24/7 operations organization <strong>5×</strong> (6 → 30 FTE) across
+                  NOC, SOC, and Professional Services — establishing the escalation layers that now
+                  underpin eToro’s global 24/7 platform commitments.
+                </li>
+                <li>
+                  Shifted incident management from reactive to proactive — driving P0–P2 detection
+                  from 1-of-6 to 10-of-12 events, with AI-assisted triage cutting manual workload{' '}
+                  <strong>80%</strong>.
+                </li>
+                <li>
+                  Owned the operational narrative to senior leadership — shaping platform
+                  reliability planning and sustaining <strong>99.95%+</strong> SLA adherence through
+                  it.
+                </li>
               </ul>
             </motion.article>
 
@@ -293,6 +320,9 @@ function App() {
                     <div className="experience-company experience-company-evolution">
                       Evolution · iGaming
                     </div>
+                    <div className="experience-company-scale">
+                      Global live-casino leader · Nasdaq Stockholm (EVO)
+                    </div>
                   </div>
                 </div>
                 <div className="experience-meta">
@@ -308,10 +338,24 @@ function App() {
                 Promoted to Team Lead within two years of joining
               </p>
               <ul className="experience-highlights">
-                <li>Managed a 12-person support team operating across four global locations within a high-volume, 24/7 iGaming environment — owning shift planning, quality calibration, and performance coaching.</li>
-                <li>Led Tier 1 and Tier 2 escalations including VIP and regulator-sensitive incidents — ensuring compliant resolution within strict regulatory frameworks and protecting the business from compliance exposure across multiple licensed jurisdictions.</li>
-                <li>Implemented structured mentorship and QA programs improving first-level resolution rates by 30% across a 66-person support organization.</li>
-                <li>Standardized 45+ operational workflows in Confluence, reducing onboarding time by 25% and lowering average ticket workload by 40% through systematic process optimization.</li>
+                <li>
+                  Managed a 12-person support team across four global locations in a 24/7 iGaming
+                  environment — owning shift planning, quality calibration, and performance
+                  coaching.
+                </li>
+                <li>
+                  Led Tier 1 and Tier 2 escalations on VIP and regulator-sensitive incidents —
+                  ensuring compliant resolution and protecting the business from compliance exposure
+                  across multiple licensed jurisdictions.
+                </li>
+                <li>
+                  Designed mentorship and QA programs that lifted first-level resolution rates{' '}
+                  <strong>30%</strong> across a 66-person support organization.
+                </li>
+                <li>
+                  Standardized 45+ operational workflows in Confluence — cutting onboarding time 25%
+                  and average ticket workload 40%.
+                </li>
               </ul>
             </motion.article>
           </div>
@@ -324,7 +368,7 @@ function App() {
             index="03"
             label="Case Studies"
             title="Selected Work"
-            subtitle="Operational problems, the approach taken, and the measurable result."
+            subtitle="Two stories told the way I’d tell them in an interview — situation, hardest part, approach, outcome."
           />
 
           <div className="case-studies-stack">
@@ -340,7 +384,8 @@ function App() {
                 <CaseStudyCard
                   index={String(i + 1).padStart(2, '0')}
                   title={cs.title}
-                  problem={cs.problem}
+                  situation={cs.situation}
+                  hardestPart={cs.hardestPart}
                   action={cs.action}
                   result={cs.result}
                 />
@@ -350,39 +395,13 @@ function App() {
         </div>
       </section>
 
-      <section className="portfolio-section portfolio-section-alt" id="operational-impact">
+      <section className="portfolio-section portfolio-section-alt" id="projects">
         <div className="portfolio-section-inner">
           <SectionHeader
             index="04"
-            label="Business Value"
-            title="Operational Impact"
-            subtitle="How operational rigor translates into outcomes beyond technical metrics."
-          />
-
-          <div className="impact-stack">
-            {operationalImpactItems.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-40px' }}
-                custom={i + 1}
-                variants={fadeInUp}
-              >
-                <ImpactCard label={item.label}>{item.body}</ImpactCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="portfolio-section" id="projects">
-        <div className="portfolio-section-inner">
-          <SectionHeader
-            index="05"
             label="Product"
             title="Projects"
-            subtitle="Products I've built and shipped — alongside the operations work."
+            subtitle="Products I’ve shipped in parallel — they sharpen the ops discipline with firsthand product, auth, billing, and deployment context."
           />
 
           <div className="projects-grid">
@@ -404,7 +423,13 @@ function App() {
                 </div>
                 <h3 className="project-card-title">{project.title}</h3>
                 <p className="project-card-description">
-                  <em style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', color: 'var(--wine-200)' }}>
+                  <em
+                    style={{
+                      fontFamily: "'Fraunces', serif",
+                      fontStyle: 'italic',
+                      color: 'var(--wine-200)',
+                    }}
+                  >
                     {project.subtitle}.
                   </em>{' '}
                   {project.description}
@@ -429,13 +454,13 @@ function App() {
         </div>
       </section>
 
-      <section className="portfolio-section portfolio-section-alt" id="skills">
+      <section className="portfolio-section" id="skills">
         <div className="portfolio-section-inner">
           <SectionHeader
-            index="06"
+            index="05"
             label="Expertise"
             title="Skills & Tools"
-            subtitle="Core competencies in operations management, incident response, and infrastructure automation."
+            subtitle="Core competencies across incident response, automation, and the regulatory and business fluency expected of senior operations leadership."
           />
 
           <div className="skills-categories">
@@ -463,10 +488,10 @@ function App() {
         </div>
       </section>
 
-      <section className="portfolio-section" id="leadership">
+      <section className="portfolio-section portfolio-section-alt" id="leadership">
         <div className="portfolio-section-inner portfolio-section-narrow">
           <SectionHeader
-            index="07"
+            index="06"
             label="Philosophy"
             title="How I Operate"
             subtitle="Principles that guide how I build teams, systems, and accountability."
@@ -487,13 +512,13 @@ function App() {
         </div>
       </section>
 
-      <section className="portfolio-section portfolio-section-alt" id="contact">
+      <section className="portfolio-section" id="contact">
         <div className="portfolio-section-inner">
           <SectionHeader
-            index="08"
+            index="07"
             label="Connect"
             title="Correspondence"
-            subtitle="Open to discussing operations leadership opportunities, consulting, and strategic partnerships."
+            subtitle="Open to discussing Director / Head of Operations roles, consulting, and strategic partnerships."
           />
 
           <p className="contact-availability">

@@ -296,6 +296,15 @@ a {
 .experience-company-setanta { color: var(--setanta-yellow); }
 .experience-company-evolution { color: var(--evolution-blue); }
 
+.experience-company-scale {
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
 .experience-meta {
   display: flex;
   flex-direction: column;

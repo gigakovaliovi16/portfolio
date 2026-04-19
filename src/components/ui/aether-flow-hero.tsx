@@ -225,7 +225,7 @@ const AetherFlowHero = () => {
                     animate="visible"
                     className="hero-eyebrow"
                 >
-                    Operations &amp; Infrastructure Leader
+                    24/7 Operations for Regulated FinTech &amp; iGaming
                 </motion.p>
 
                 <motion.div
@@ -236,11 +236,12 @@ const AetherFlowHero = () => {
                     className="hero-lede"
                 >
                     <p>
-                        I build and scale 24/7 operational systems for high-risk, high-volume
-                        platforms across <em>iGaming</em> and <em>FinTech</em>.
+                        At <em>eToro</em> I cut MTTA from 17 minutes to 1, scaled the 24/7 org
+                        6→30 FTE, and held 99.98% SLA through peak trading.
                     </p>
                     <p className="hero-lede-sub">
-                        Focused on reliability, scalability, and operational maturity.
+                        I run ops for regulated <em>FinTech</em> and <em>iGaming</em> platforms —
+                        where availability is the product.
                     </p>
                 </motion.div>
 
