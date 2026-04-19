@@ -1,7 +1,7 @@
 # Portfolio — Giga Kovaliovi
 
 Personal portfolio for Giga Kovaliovi, Operations & Infrastructure Leader.
-
+ 
 Built with React 19, Vite, Tailwind 4, and Framer Motion. Deployed on Vercel.
 
 ## Development
