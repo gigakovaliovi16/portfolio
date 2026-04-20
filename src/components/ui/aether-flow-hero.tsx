@@ -236,14 +236,13 @@ const AetherFlowHero = () => {
                     className="hero-lede"
                 >
                     <p>
-                        At <em>eToro</em> I rebuilt the 24/7 operations function — MTTA from 17
-                        minutes to 1, organization scaled from 6 to 30 across NOC, SOC, and
-                        Professional Services.
+                        I lead 24/7 operations for regulated <em>FinTech</em> and{' '}
+                        <em>iGaming</em>.
                     </p>
                     <p className="hero-lede-sub">
-                        Currently leading application support at <em>SetantaSports</em> alongside
-                        the eToro role — regulated FinTech and iGaming across multiple licensed
-                        jurisdictions.
+                        <em>eToro</em> (Operational Excellence · NASDAQ: ETOR).{' '}
+                        <em>SetantaSports</em> (Application Support). <em>Evolution</em> before
+                        that.
                     </p>
                 </motion.div>
 
