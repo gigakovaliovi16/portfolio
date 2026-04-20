@@ -6,6 +6,7 @@ import {
   MapPin,
   Calendar,
   ArrowUpRight,
+  FileText,
 } from 'lucide-react';
 import AetherFlowHero from '@/components/ui/aether-flow-hero';
 import { CaseStudyCard } from '@/components/case-study-card';
@@ -540,12 +541,30 @@ function App() {
 
           <div className="contact-grid">
             <motion.a
-              href="mailto:gigakovaliovi@gmail.com"
+              href="/giga-kovaliovi-cv.pdf"
+              download
               className="contact-item"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={1}
+              variants={fadeInUp}
+            >
+              <span className="contact-label">
+                <FileText size={11} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />
+                CV · PDF
+              </span>
+              <span className="contact-value">Download</span>
+              <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
+            </motion.a>
+
+            <motion.a
+              href="mailto:gigakovaliovi@gmail.com"
+              className="contact-item"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={2}
               variants={fadeInUp}
             >
               <span className="contact-label">
@@ -562,7 +581,7 @@ function App() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={2}
+              custom={3}
               variants={fadeInUp}
             >
               <span className="contact-label">
@@ -581,7 +600,7 @@ function App() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              custom={3}
+              custom={4}
               variants={fadeInUp}
             >
               <span className="contact-label">LinkedIn</span>
