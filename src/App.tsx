@@ -107,13 +107,13 @@ const skillCategories = [
     skills: ['AI-Assisted Ticket Routing', 'Automated Categorization', 'Proactive Detection (P0–P2)', 'Log Analysis Automation', 'Operational Reporting'],
   },
   {
-    title: 'Regulatory & Business Acumen',
+    title: 'Regulatory & Compliance',
     skills: [
-      'Multi-Jurisdictional Licensed Operations',
-      'Senior-Leadership Operational Reporting',
-      'Vendor Management',
-      'Ops Cost & Capacity Planning',
-      'Cross-functional Partnership (Product · Engineering · Legal)',
+      'iGaming Licensing (MGA · UKGC · Responsible Gambling)',
+      'FinTech Regulation (FCA · CySEC · MiFID II)',
+      'Operational Resilience (DORA · SOX 404)',
+      'GDPR & Data-Breach Handling',
+      'AML / CFT Controls',
     ],
   },
 ];
@@ -238,6 +238,12 @@ function App() {
                   Partnered with Product and DevOps leadership to prioritize operational risk by
                   business impact during high-traffic windows.
                 </li>
+                <li>
+                  Operated under <strong>MGA</strong> and <strong>UKGC</strong> licensing —
+                  regulator-facing incident reporting, GDPR 72-hour breach handling, and
+                  Responsible Gambling / AML-CFT controls integrated into the incident routing
+                  model.
+                </li>
               </ul>
             </motion.article>
 
@@ -298,6 +304,13 @@ function App() {
                   Owned the operational narrative to senior leadership — shaping platform
                   reliability planning and sustaining <strong>99.95%+</strong> SLA adherence through
                   it.
+                </li>
+                <li>
+                  Led regulatory incident handling via <strong>Professional Services</strong> —
+                  classification, escalation, and reporting under <strong>DORA</strong> (major ICT
+                  incidents), <strong>MiFID II</strong>, <strong>FCA</strong>, and{' '}
+                  <strong>CySEC</strong>, with <strong>SOX 404</strong> change-management discipline
+                  layered in following eToro’s 2025 NASDAQ listing.
                 </li>
               </ul>
             </motion.article>
