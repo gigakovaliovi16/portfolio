@@ -236,12 +236,14 @@ const AetherFlowHero = () => {
                     className="hero-lede"
                 >
                     <p>
-                        At <em>eToro</em> I cut MTTA from 17 minutes to 1, scaled the 24/7 org
-                        6→30 FTE, and held 99.98% SLA through peak trading.
+                        At <em>eToro</em> I rebuilt the 24/7 operations function — MTTA from 17
+                        minutes to 1, organization scaled from 6 to 30 across NOC, SOC, and
+                        Professional Services.
                     </p>
                     <p className="hero-lede-sub">
-                        I run ops for regulated <em>FinTech</em> and <em>iGaming</em> platforms —
-                        where availability is the product.
+                        Currently leading application support at <em>SetantaSports</em> alongside
+                        the eToro role — regulated FinTech and iGaming across multiple licensed
+                        jurisdictions.
                     </p>
                 </motion.div>
 

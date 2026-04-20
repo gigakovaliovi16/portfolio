@@ -49,7 +49,7 @@ function SectionHeader({ index, label, title, subtitle }: SectionHeaderProps) {
 
 const metrics = [
   { value: '93%', label: 'MTTA reduction (17.3 → 1.2 min)' },
-  { value: '99.98%', label: 'SLA adherence with 1-minute average MTTA' },
+  { value: '99.98%', label: 'SLA adherence through peak streaming & betting events' },
   { value: '6→30', label: 'FTE scale across NOC, SOC, and Professional Services' },
   { value: '80%', label: 'Manual triage reduction via AI-assisted routing' },
   { value: '10/12', label: 'P0–P2 events proactively detected (from 1 of 6)' },
@@ -69,24 +69,23 @@ const caseStudies = [
       'MTTA 17.3 → 1.2 min (93%). FLR 80% → 98%. The structure now anchors eToro’s global 24/7 platform commitments.',
   },
   {
-    title: 'AI-Assisted Triage at Regulated Scale',
+    title: 'Building L2 Application Support at SetantaSports from Zero',
     situation:
-      '2,000+ monthly tickets across diverse incident categories. Manual triage was burning out L1 and slowing MTTR during high-traffic trading windows.',
+      'SetantaSports had no dedicated Tier 2 structure when I took over application support — 2,000+ monthly cases were escalating into engineering through an overloaded Tier 1. Live broadcast and betting traffic left no maintenance window.',
     hardestPart:
-      'Earning trust from Product and Engineering to hand triage authority to an AI-assisted system in a regulated environment where mis-routing carries audit consequences.',
+      'Hiring and standing up a 10-person Tier 2 team while holding the platform up through peak streaming and betting events. No soft-launch — every escalation model change had to land in production live.',
     action:
-      'Phased rollout with human-in-loop review, automated categorization tied to Jira Service Management, and a clear audit trail for every routing decision.',
+      'Built the L2 function end-to-end: hiring plan, shift model, tiered escalation, Jira Service Management workflow, and an AI-assisted triage layer on top — all phased so Tier 1 and engineering stayed unblocked through the build.',
     result:
-      '80% manual triage reduction. 22% MTTR improvement. No compliance findings tied to routing since launch.',
+      '99.98% SLA adherence against a 5-minute MTTA target. 22% MTTR improvement. Independent Tier 2 operation within the first year — engineering no longer carries frontline escalation load.',
   },
 ];
 
 const leadershipPrinciples = [
   'I build systems, not dependencies on individuals.',
-  'I prioritize clarity in ownership, escalation, and accountability.',
+  'I design escalation so the on-call engineer has the authority to stop the line.',
   'I treat incidents as data for improvement, not isolated failures.',
-  'I focus on scalability before optimization.',
-  'I design operations that can sustain growth without constant intervention.',
+  'I scale before I optimize — the binding constraint is almost always capacity, not efficiency.',
   'I measure operational maturity by how many decisions happen without my involvement.',
 ];
 
@@ -110,11 +109,11 @@ const skillCategories = [
   {
     title: 'Regulatory & Business Acumen',
     skills: [
-      'Licensed-Jurisdiction Incident Reporting',
-      'Board-Level Operational Narrative',
+      'Multi-Jurisdictional Licensed Operations',
+      'Senior-Leadership Operational Reporting',
       'Vendor Management',
-      'Ops Budget Ownership',
-      'Partnership with Product, Engineering, Legal',
+      'Ops Cost & Capacity Planning',
+      'Cross-functional Partnership (Product · Engineering · Legal)',
     ],
   },
 ];
@@ -122,11 +121,11 @@ const skillCategories = [
 const projects = [
   {
     title: 'Opsrift',
-    subtitle: 'Incident Postmortem Platform',
+    subtitle: 'Incident Management Platform',
     badge: 'Shipping',
     description:
-      'AI-powered postmortem tool for ops and SRE teams. Built from the problem space I lived at eToro — compressing investigation time so learning lands inside the window where it still changes behavior.',
-    tags: ['AI', 'Incident Response', 'SRE'],
+      'End-to-end incident management for ops and SRE teams — detection, routing, investigation, and post-incident learning in one surface. Built from the problems I lived at eToro, with AI layered into the workflow where it measurably shortens time-to-decision.',
+    tags: ['AI', 'Incident Management', 'SRE'],
     href: 'https://opsrift.com',
     hrefLabel: 'opsrift.com',
   },
@@ -184,7 +183,7 @@ function App() {
             index="02"
             label="Experience"
             title="Professional Journey"
-            subtitle="Six years building and scaling operational infrastructure across iGaming and FinTech."
+            subtitle="Six years scaling 24/7 operations across iGaming and FinTech. Started on the floor at Evolution; now leading application support at SetantaSports alongside the Operational Excellence role at eToro."
           />
 
           <div className="experience-timeline">
@@ -261,7 +260,7 @@ function App() {
                       eToro · Webiz International
                     </div>
                     <div className="experience-company-scale">
-                      Listed social trading platform · global consumer FinTech
+                      NASDAQ-listed social trading platform (ETOR) · global consumer FinTech
                     </div>
                   </div>
                 </div>
@@ -280,14 +279,15 @@ function App() {
               </p>
               <ul className="experience-highlights">
                 <li>
+                  Grew and led the 24/7 operations organization from <strong>6 to 30 FTE</strong>{' '}
+                  across NOC, SOC, and Professional Services — on-call rotations, explicit
+                  escalation authority at every boundary, and the coverage model now underpinning
+                  eToro’s global platform commitments.
+                </li>
+                <li>
                   Cut MTTA <strong>93%</strong> (17.3 → 1.2 min) and lifted First Line Resolution
                   from 80% to 98% across 2,000+ monthly tickets — materially reducing
                   customer-facing downtime during peak trading.
-                </li>
-                <li>
-                  Scaled the 24/7 operations organization <strong>5×</strong> (6 → 30 FTE) across
-                  NOC, SOC, and Professional Services — establishing the escalation layers that now
-                  underpin eToro’s global 24/7 platform commitments.
                 </li>
                 <li>
                   Shifted incident management from reactive to proactive — driving P0–P2 detection
@@ -518,7 +518,7 @@ function App() {
             index="07"
             label="Connect"
             title="Correspondence"
-            subtitle="Open to discussing Director / Head of Operations roles, consulting, and strategic partnerships."
+            subtitle="Open to Director / Head of Operations roles in regulated FinTech and iGaming."
           />
 
           <p className="contact-availability">
