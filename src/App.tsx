@@ -8,53 +8,111 @@ import {
   ArrowUpRight,
   FileText,
 } from 'lucide-react';
-import AetherFlowHero from '@/components/ui/aether-flow-hero';
+import { GithubGlyph, LinkedinGlyph } from '@/components/brand-icons';
+import CinematicHero from '@/components/cinematic-hero';
+import Foreword from '@/components/foreword';
+import VitalsStrip from '@/components/vitals-strip';
+import ChapterRail from '@/components/chapter-rail';
+import type { Chapter } from '@/components/chapter-rail';
+import PullQuote from '@/components/pull-quote';
+import { MetricChart } from '@/components/metric-chart';
+import RegulatoryWall from '@/components/regulatory-wall';
 import { CaseStudyCard } from '@/components/case-study-card';
 import { EtoroMark, EvolutionMark, SetantaMark } from '@/components/company-logos';
 import './index.css';
+
+const easing: Easing = [0.22, 0.61, 0.36, 1];
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 14 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.05, duration: 0.7, ease: 'easeOut' as Easing },
+    transition: { delay: i * 0.05, duration: 0.7, ease: easing },
   }),
 };
 
 type SectionHeaderProps = {
-  index: string;
+  numeral: string;
   label: string;
   title: string;
   subtitle: string;
 };
 
-function SectionHeader({ index, label, title, subtitle }: SectionHeaderProps) {
+function SectionHeader({ numeral, label, title, subtitle }: SectionHeaderProps) {
   return (
     <motion.div
-      className="section-header"
+      className="section-head"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
       custom={0}
       variants={fadeInUp}
     >
-      <span className="section-label">
-        § {index} — {label}
-      </span>
-      <h2 className="section-title">{title}</h2>
-      <p className="section-subtitle">{subtitle}</p>
+      <div className="section-head-row">
+        <span className="section-head-numeral">{numeral}</span>
+        <span className="section-head-rule" aria-hidden />
+        <span className="section-head-label">{label}</span>
+      </div>
+      <h2 className="section-head-title">{title}</h2>
+      <p className="section-head-subtitle">{subtitle}</p>
     </motion.div>
   );
 }
 
-const metrics = [
-  { value: '93%', label: 'MTTA reduction (17.3 → 1.2 min)' },
+const chapters: Chapter[] = [
+  { id: 'hero', numeral: 'I', label: 'Cover' },
+  { id: 'mandate', numeral: 'II', label: 'Mandate' },
+  { id: 'track-record', numeral: 'III', label: 'Track Record' },
+  { id: 'experience', numeral: 'IV', label: 'Tenure' },
+  { id: 'case-studies', numeral: 'V', label: 'Selected Work' },
+  { id: 'regulatory', numeral: 'VI', label: 'Perimeter' },
+  { id: 'skills', numeral: 'VII', label: 'Instruments' },
+  { id: 'projects', numeral: 'VIII', label: 'In Parallel' },
+  { id: 'philosophy', numeral: 'IX', label: 'Operating' },
+  { id: 'contact', numeral: 'X', label: 'Correspondence' },
+];
+
+const charts = [
+  {
+    label: 'Escalation Rate · SetantaSports',
+    unit: '%',
+    direction: 'down' as const,
+    before: { value: 65, caption: 'Pre-restructure · escalations flooding into engineering' },
+    after: { value: 3, caption: 'Twelve months later · L2 absorbs the work' },
+    max: 70,
+  },
+  {
+    label: 'Mean Time to Acknowledge · eToro',
+    unit: 'min',
+    direction: 'down' as const,
+    before: { value: 17.3, caption: 'Pre-intervention baseline · 2,000+ tickets / month' },
+    after: { value: 1.2, caption: 'Post tiered-escalation rollout · live trading windows' },
+    max: 18,
+  },
+  {
+    label: 'First-Line Resolution · eToro',
+    unit: '%',
+    direction: 'up' as const,
+    before: { value: 80, caption: 'Pre-restructure · escalations leaking into engineering' },
+    after: { value: 98, caption: 'Post-restructure · L1 closes the work' },
+    max: 100,
+  },
+  {
+    label: '24/7 Operations Headcount · eToro',
+    unit: 'FTE',
+    direction: 'up' as const,
+    before: { value: 6, caption: 'Initial team · NOC only' },
+    after: { value: 30, caption: 'Built out · NOC · SOC · Professional Services' },
+    max: 32,
+  },
+];
+
+const ledger = [
   { value: '99.98%', label: 'SLA adherence through peak streaming & betting events' },
-  { value: '6→30', label: 'FTE scale across NOC, SOC, and Professional Services' },
-  { value: '80%', label: 'Manual triage reduction via AI-assisted routing' },
-  { value: '10/12', label: 'P0–P2 events proactively detected (from 1 of 6)' },
-  { value: '22%', label: 'MTTR improvement via AI triage' },
+  { value: '60%', label: 'Manual triage workload removed via AI-assisted routing' },
+  { value: '10 / 12', label: 'P0–P2 events proactively detected — from 1 of 6 prior' },
+  { value: '411k', label: 'Aviator B2B daily users on Jira-integrated bonus engine I shipped' },
 ];
 
 const caseStudies = [
@@ -93,19 +151,66 @@ const leadershipPrinciples = [
 const skillCategories = [
   {
     title: 'Incident Management',
-    skills: ['MTTA/MTTR Optimization', 'Root Cause Analysis', 'Escalation Frameworks', 'Blameless Postmortems', 'Incident Command'],
+    skills: [
+      'MTTA / MTTR Optimization',
+      'Root Cause Analysis',
+      'Escalation Frameworks',
+      'Blameless Postmortems',
+      'Incident Command',
+    ],
   },
   {
-    title: 'Operations & Tooling',
-    skills: ['PagerDuty', 'Jira Service Management', 'AWS Monitoring', 'Confluence', 'Service Desk Automation'],
+    title: 'Monitoring & Incident',
+    skills: [
+      'Datadog',
+      'Grafana',
+      'Splunk',
+      'Kibana',
+      'PagerDuty',
+      'OpsGenie',
+      'Incident.io',
+      'AWS CloudWatch',
+    ],
+  },
+  {
+    title: 'Service Management',
+    skills: [
+      'Jira Service Management',
+      'ServiceNow',
+      'Confluence',
+      'Workflow Automation',
+      'ITIL',
+    ],
+  },
+  {
+    title: 'Cloud & Data',
+    skills: [
+      'AWS Infrastructure',
+      'Databricks',
+      'SQL',
+      'API Troubleshooting',
+      'Log Analysis',
+    ],
   },
   {
     title: 'Leadership & Strategy',
-    skills: ['24/7 NOC / SOC Management', 'Team Building (6→30 FTE)', 'SLA Framework Design', 'Bootcamp Development', 'Cross-functional Partnership'],
+    skills: [
+      '24/7 NOC / SOC Management',
+      'Team Building (6 → 30 FTE)',
+      'SLA Framework Design',
+      'Bootcamp Development',
+      'Cross-functional Partnership',
+    ],
   },
   {
     title: 'AI & Automation',
-    skills: ['AI-Assisted Ticket Routing', 'Automated Categorization', 'Proactive Detection (P0–P2)', 'Log Analysis Automation', 'Operational Reporting'],
+    skills: [
+      'AI-Assisted Ticket Routing',
+      'Automated Categorization',
+      'Proactive Detection (P0–P2)',
+      'Log Analysis Automation',
+      'Operational Reporting',
+    ],
   },
   {
     title: 'Regulatory & Compliance',
@@ -144,489 +249,568 @@ const projects = [
 
 function App() {
   return (
-    <main>
-      <AetherFlowHero />
+    <>
+      <ChapterRail chapters={chapters} />
 
-      <section className="portfolio-section" id="achievements">
-        <div className="portfolio-section-inner">
-          <SectionHeader
-            index="01"
-            label="Impact"
-            title="Key Achievements"
-            subtitle="Measurable outcomes from building operational infrastructure at scale."
-          />
+      <main className="shell">
+        <CinematicHero />
 
-          <div className="metrics-grid">
-            {metrics.map((metric, i) => (
-              <motion.div
-                className="metric-card"
-                key={metric.label}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-50px' }}
-                custom={i + 1}
-                variants={fadeInUp}
-              >
-                <span className="metric-index">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div className="metric-value">{metric.value}</div>
-                <div className="metric-label">{metric.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+        <Foreword />
 
-      <section className="portfolio-section portfolio-section-alt" id="experience">
-        <div className="portfolio-section-inner">
-          <SectionHeader
-            index="02"
-            label="Experience"
-            title="Professional Journey"
-            subtitle="Six years scaling 24/7 operations across iGaming and FinTech. Started on the floor at Evolution; now leading application support at SetantaSports alongside the Operational Excellence role at eToro."
-          />
+        <VitalsStrip />
 
-          <div className="experience-timeline">
-            <motion.article
-              className="experience-card"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-50px' }}
-              custom={1}
-              variants={fadeInUp}
-            >
-              <div className="experience-header">
-                <div className="experience-header-main">
-                  <SetantaMark className="experience-company-logo" />
-                  <div>
-                    <div className="experience-role">Application Support Manager</div>
-                    <div className="experience-company experience-company-setanta">
-                      SetantaSports · iGaming
-                    </div>
-                    <div className="experience-company-scale">
-                      Premium sports streaming &amp; betting · high-traffic broadcast
-                    </div>
-                  </div>
-                </div>
-                <div className="experience-meta">
-                  <span>
-                    <Calendar size={12} /> Jan 2025 — Present
-                  </span>
-                  <span>
-                    <MapPin size={12} /> Tbilisi, Georgia
-                  </span>
-                </div>
-              </div>
-              <p className="experience-note">
-                Concurrent appointment alongside Webiz · eToro
+        <section className="section" id="mandate">
+          <div className="section-inner section-inner--narrow">
+            <SectionHeader
+              numeral="II"
+              label="Mandate"
+              title="The work, in one paragraph."
+              subtitle="What I actually do — for recruiters who only have ninety seconds before the next CV."
+            />
+            <div className="mandate-body">
+              <p className="mandate-lede">
+                I take 24/7 operations from <em>“we hope it holds”</em> to a system that runs
+                without me in the room. Tiered escalation with explicit authority. AI-assisted
+                triage where it actually shortens time-to-decision. A regulatory posture that
+                survives audit instead of just passing it.
               </p>
-              <ul className="experience-highlights">
-                <li>
-                  Built the Application Support function from scratch at a streaming platform with no
-                  prior L2 structure — recruited and shaped a 10-person Tier 2 team from zero.
-                </li>
-                <li>
-                  Held <strong>99.98% SLA</strong> with a 1-minute average MTTA against a 5-minute
-                  target, safeguarding platform availability through peak streaming and betting
-                  events.
-                </li>
-                <li>
-                  Owned the AI-assisted triage rollout in Jira Service Management across 2,000+
-                  monthly cases — cutting MTTR by <strong>22%</strong>.
-                </li>
-                <li>
-                  Partnered with Product and DevOps leadership to prioritize operational risk by
-                  business impact during high-traffic windows.
-                </li>
-                <li>
-                  Operated under <strong>MGA</strong> and <strong>UKGC</strong> licensing —
-                  regulator-facing incident reporting, GDPR 72-hour breach handling, and
-                  Responsible Gambling / AML-CFT controls integrated into the incident routing
-                  model.
-                </li>
-              </ul>
-            </motion.article>
-
-            <motion.article
-              className="experience-card"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-50px' }}
-              custom={2}
-              variants={fadeInUp}
-            >
-              <div className="experience-header">
-                <div className="experience-header-main">
-                  <EtoroMark className="experience-company-logo" />
-                  <div>
-                    <div className="experience-role">
-                      Operations Center Manager → Operational Excellence Manager
-                    </div>
-                    <div className="experience-company experience-company-etoro">
-                      eToro · Webiz International
-                    </div>
-                    <div className="experience-company-scale">
-                      NASDAQ-listed social trading platform (ETOR) · global consumer FinTech
-                    </div>
-                  </div>
-                </div>
-                <div className="experience-meta">
-                  <span>
-                    <Calendar size={12} /> Oct 2023 — Present
-                  </span>
-                  <span>
-                    <MapPin size={12} /> Tbilisi, Georgia
-                  </span>
-                </div>
-              </div>
-              <p className="experience-note">
-                Promoted from Operations Center Manager to Operational Excellence Manager, October
-                2024
+              <p className="mandate-sub">
+                Currently at SetantaSports, where I stood up Application Support Tier 2 from zero
+                while the platform was live — cutting escalation rate from 65% to 3% in twelve
+                months and holding 99.98% SLA through peak streaming and betting. Before that, at
+                eToro, I rebuilt the Operations Center from six people to thirty across NOC, SOC,
+                and Professional Services, cut MTTA 93%, and founded Georgia&rsquo;s first SOC
+                bootcamp. I&rsquo;m looking for the next operation to run.
               </p>
-              <ul className="experience-highlights">
-                <li>
-                  Grew and led the 24/7 operations organization from <strong>6 to 30 FTE</strong>{' '}
-                  across NOC, SOC, and Professional Services — on-call rotations, explicit
-                  escalation authority at every boundary, and the coverage model now underpinning
-                  eToro’s global platform commitments.
-                </li>
-                <li>
-                  Cut MTTA <strong>93%</strong> (17.3 → 1.2 min) and lifted First Line Resolution
-                  from 80% to 98% across 2,000+ monthly tickets — materially reducing
-                  customer-facing downtime during peak trading.
-                </li>
-                <li>
-                  Shifted incident management from reactive to proactive — driving P0–P2 detection
-                  from 1-of-6 to 10-of-12 events, with AI-assisted triage cutting manual workload{' '}
-                  <strong>80%</strong>.
-                </li>
-                <li>
-                  Owned the operational narrative to senior leadership — shaping platform
-                  reliability planning and sustaining <strong>99.95%+</strong> SLA adherence through
-                  it.
-                </li>
-                <li>
-                  Led regulatory incident handling via <strong>Professional Services</strong> —
-                  classification, escalation, and reporting under <strong>DORA</strong> (major ICT
-                  incidents), <strong>MiFID II</strong>, <strong>FCA</strong>, and{' '}
-                  <strong>CySEC</strong>, with <strong>SOX 404</strong> change-management discipline
-                  layered in following eToro’s 2025 NASDAQ listing.
-                </li>
-              </ul>
-            </motion.article>
-
-            <motion.article
-              className="experience-card"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-50px' }}
-              custom={3}
-              variants={fadeInUp}
-            >
-              <div className="experience-header">
-                <div className="experience-header-main">
-                  <EvolutionMark className="experience-company-logo" />
-                  <div>
-                    <div className="experience-role">
-                      Service Support Specialist → Service Support Team Lead
-                    </div>
-                    <div className="experience-company experience-company-evolution">
-                      Evolution · iGaming
-                    </div>
-                    <div className="experience-company-scale">
-                      Global live-casino leader · Nasdaq Stockholm (EVO)
-                    </div>
-                  </div>
-                </div>
-                <div className="experience-meta">
-                  <span>
-                    <Calendar size={12} /> Dec 2019 — Oct 2023
-                  </span>
-                  <span>
-                    <MapPin size={12} /> Tbilisi, Georgia
-                  </span>
-                </div>
-              </div>
-              <p className="experience-note">
-                Promoted to Team Lead within two years of joining
-              </p>
-              <ul className="experience-highlights">
-                <li>
-                  Managed a 12-person support team across four global locations in a 24/7 iGaming
-                  environment — owning shift planning, quality calibration, and performance
-                  coaching.
-                </li>
-                <li>
-                  Led Tier 1 and Tier 2 escalations on VIP and regulator-sensitive incidents —
-                  ensuring compliant resolution and protecting the business from compliance exposure
-                  across multiple licensed jurisdictions.
-                </li>
-                <li>
-                  Designed mentorship and QA programs that lifted first-level resolution rates{' '}
-                  <strong>30%</strong> across a 66-person support organization.
-                </li>
-                <li>
-                  Standardized 45+ operational workflows in Confluence — cutting onboarding time 25%
-                  and average ticket workload 40%.
-                </li>
-              </ul>
-            </motion.article>
-          </div>
-        </div>
-      </section>
-
-      <section className="portfolio-section" id="case-studies">
-        <div className="portfolio-section-inner">
-          <SectionHeader
-            index="03"
-            label="Case Studies"
-            title="Selected Work"
-            subtitle="Two stories told the way I’d tell them in an interview — situation, hardest part, approach, outcome."
-          />
-
-          <div className="case-studies-stack">
-            {caseStudies.map((cs, i) => (
-              <motion.div
-                key={cs.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-50px' }}
-                custom={i + 1}
-                variants={fadeInUp}
-              >
-                <CaseStudyCard
-                  index={String(i + 1).padStart(2, '0')}
-                  title={cs.title}
-                  situation={cs.situation}
-                  hardestPart={cs.hardestPart}
-                  action={cs.action}
-                  result={cs.result}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="portfolio-section portfolio-section-alt" id="projects">
-        <div className="portfolio-section-inner">
-          <SectionHeader
-            index="04"
-            label="Product"
-            title="Projects"
-            subtitle="Products I’ve shipped in parallel — they sharpen the ops discipline with firsthand product, auth, billing, and deployment context."
-          />
-
-          <div className="projects-grid">
-            {projects.map((project, i) => (
-              <motion.article
-                key={project.title}
-                className="project-card"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-50px' }}
-                custom={i + 1}
-                variants={fadeInUp}
-              >
-                <div className="project-card-head">
-                  <span className="project-card-index">
-                    {String(i + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-                  </span>
-                  <span className="project-card-badge">{project.badge}</span>
-                </div>
-                <h3 className="project-card-title">{project.title}</h3>
-                <p className="project-card-description">
-                  <em
-                    style={{
-                      fontFamily: "'Fraunces', serif",
-                      fontStyle: 'italic',
-                      color: 'var(--wine-200)',
-                    }}
-                  >
-                    {project.subtitle}.
-                  </em>{' '}
-                  {project.description}
-                </p>
-                <div className="project-card-tags">
-                  {project.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-                <a
-                  href={project.href}
-                  className="project-card-cta"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>Visit {project.hrefLabel}</span>
-                  <ArrowUpRight size={14} aria-hidden />
-                </a>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="portfolio-section" id="skills">
-        <div className="portfolio-section-inner">
-          <SectionHeader
-            index="05"
-            label="Expertise"
-            title="Skills & Tools"
-            subtitle="Core competencies across incident response, automation, and the regulatory and business fluency expected of senior operations leadership."
-          />
-
-          <div className="skills-categories">
-            {skillCategories.map((cat, i) => (
-              <motion.div
-                className="skill-category"
-                key={cat.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-50px' }}
-                custom={i + 1}
-                variants={fadeInUp}
-              >
-                <div className="skill-category-title">{cat.title}</div>
-                <div className="skill-tags">
-                  {cat.skills.map((skill) => (
-                    <span className="skill-tag" key={skill}>
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="portfolio-section portfolio-section-alt" id="leadership">
-        <div className="portfolio-section-inner portfolio-section-narrow">
-          <SectionHeader
-            index="06"
-            label="Philosophy"
-            title="How I Operate"
-            subtitle="Principles that guide how I build teams, systems, and accountability."
-          />
-
-          <motion.ul
-            className="philosophy-list"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
-            custom={1}
-            variants={fadeInUp}
-          >
-            {leadershipPrinciples.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </motion.ul>
-        </div>
-      </section>
-
-      <section className="portfolio-section" id="contact">
-        <div className="portfolio-section-inner">
-          <SectionHeader
-            index="07"
-            label="Connect"
-            title="Correspondence"
-            subtitle="Open to Director / Head of Operations roles in regulated FinTech and iGaming."
-          />
-
-          <p className="contact-availability">
-            Based in Tbilisi, Georgia — open to remote and international opportunities.
-          </p>
-
-          <div className="contact-grid">
-            <motion.a
-              href="/giga-kovaliovi-cv.pdf"
-              download
-              className="contact-item"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              variants={fadeInUp}
-            >
-              <span className="contact-label">
-                <FileText size={11} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />
-                CV · PDF
-              </span>
-              <span className="contact-value">Download</span>
-              <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
-            </motion.a>
-
-            <motion.a
-              href="mailto:gigakovaliovi@gmail.com"
-              className="contact-item"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={2}
-              variants={fadeInUp}
-            >
-              <span className="contact-label">
-                <Mail size={11} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />
-                Email
-              </span>
-              <span className="contact-value">gigakovaliovi@gmail.com</span>
-              <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
-            </motion.a>
-
-            <motion.a
-              href="tel:+995591947168"
-              className="contact-item"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={3}
-              variants={fadeInUp}
-            >
-              <span className="contact-label">
-                <Phone size={11} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />
-                Phone
-              </span>
-              <span className="contact-value">+995 591 947 168</span>
-              <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
-            </motion.a>
-
-            <motion.a
-              href="https://linkedin.com/in/giga-kovaliovi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-item"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={4}
-              variants={fadeInUp}
-            >
-              <span className="contact-label">LinkedIn</span>
-              <span className="contact-value">giga-kovaliovi</span>
-              <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
-            </motion.a>
-
-            <div className="contact-item" style={{ cursor: 'default' }}>
-              <span className="contact-label">
-                <MapPin size={11} style={{ verticalAlign: 'middle', marginRight: '0.4rem' }} />
-                Location
-              </span>
-              <span className="contact-value">Tbilisi, Georgia</span>
-              <span />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <footer className="portfolio-footer">
-        <span>© {new Date().getFullYear()} · Giga Kovaliovi</span>
-        <span className="portfolio-footer-colophon">
-          Set in Fraunces &amp; Inter Tight · Tbilisi, MMXXVI
-        </span>
-      </footer>
-    </main>
+        <PullQuote attribution="Operating principle">
+          <em>Operations is the part of the business that turns promises into receipts.</em>
+        </PullQuote>
+
+        <section className="section section--alt" id="track-record">
+          <div className="section-inner">
+            <SectionHeader
+              numeral="III"
+              label="Track Record"
+              title="Measured outcomes, not vibes."
+              subtitle="Four intervention curves and a brief ledger of everything else worth noting."
+            />
+
+            <div className="chart-stack">
+              {charts.map((c) => (
+                <MetricChart
+                  key={c.label}
+                  label={c.label}
+                  unit={c.unit}
+                  before={c.before}
+                  after={c.after}
+                  direction={c.direction}
+                  max={c.max}
+                />
+              ))}
+            </div>
+
+            <div className="ledger">
+              <div className="ledger-head">
+                <span>Ledger</span>
+                <span className="ledger-head-rule" aria-hidden />
+                <span className="ledger-head-meta">Additional, audited</span>
+              </div>
+              <dl className="ledger-rows">
+                {ledger.map((row) => (
+                  <div className="ledger-row" key={row.label}>
+                    <dt>{row.value}</dt>
+                    <dd>{row.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="experience">
+          <div className="section-inner">
+            <SectionHeader
+              numeral="IV"
+              label="Tenure"
+              title="Six years on the floor and at the helm."
+              subtitle="Started as a specialist at Evolution. Now running application support at SetantaSports concurrently with the Operational Excellence role at eToro."
+            />
+
+            <ol className="tenure">
+              <motion.li
+                className="tenure-item"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                custom={1}
+                variants={fadeInUp}
+              >
+                <span className="tenure-marker" aria-hidden />
+                <div className="tenure-meta">
+                  <span className="tenure-dates">
+                    <Calendar size={12} aria-hidden /> Jan 2025 — Present
+                  </span>
+                  <span className="tenure-place">
+                    <MapPin size={12} aria-hidden /> Tbilisi, Georgia
+                  </span>
+                  <span className="tenure-tag">Concurrent</span>
+                </div>
+                <div className="tenure-body">
+                  <header className="tenure-head">
+                    <SetantaMark className="tenure-logo" />
+                    <div>
+                      <h3 className="tenure-role">Application Support Manager</h3>
+                      <p className="tenure-company tenure-company--setanta">
+                        SetantaSports · iGaming
+                      </p>
+                      <p className="tenure-context">
+                        Premium sports streaming &amp; betting · high-traffic broadcast
+                      </p>
+                    </div>
+                  </header>
+                  <ul className="tenure-points">
+                    <li>
+                      Built the Application Support function from scratch at a streaming platform
+                      with no prior L2 structure — recruited and shaped a 10-person Tier 2 team
+                      from zero.
+                    </li>
+                    <li>
+                      Cut escalation rate from <strong>65% to 3%</strong> in twelve months by
+                      restructuring triage logic and L1-to-L2 handoff protocols — engineering no
+                      longer carries frontline escalation load.
+                    </li>
+                    <li>
+                      Held <strong>99.98% SLA</strong> with a 1-minute average MTTA against a
+                      5-minute target, safeguarding platform availability through peak streaming
+                      and betting events.
+                    </li>
+                    <li>
+                      Designed and shipped a Jira-integrated bonus engine for the{' '}
+                      <strong>Aviator B2B operator team</strong> serving <strong>411k daily
+                      users</strong> — automating dispute and reconciliation workflows.
+                    </li>
+                    <li>
+                      Shipped AI-assisted triage in Jira Service Management across 2,000+ monthly
+                      cases — cutting MTTR <strong>22%</strong> with no headcount increase.
+                    </li>
+                    <li>
+                      Operated under <strong>MGA</strong> and <strong>UKGC</strong> licensing —
+                      regulator-facing incident reporting, GDPR 72-hour breach handling, and
+                      Responsible Gambling / AML-CFT controls integrated into the incident routing
+                      model.
+                    </li>
+                  </ul>
+                </div>
+              </motion.li>
+
+              <motion.li
+                className="tenure-item"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                custom={2}
+                variants={fadeInUp}
+              >
+                <span className="tenure-marker" aria-hidden />
+                <div className="tenure-meta">
+                  <span className="tenure-dates">
+                    <Calendar size={12} aria-hidden /> Oct 2023 — Jan 2026
+                  </span>
+                  <span className="tenure-place">
+                    <MapPin size={12} aria-hidden /> Tbilisi, Georgia
+                  </span>
+                  <span className="tenure-tag">Promoted · Oct 2024</span>
+                </div>
+                <div className="tenure-body">
+                  <header className="tenure-head">
+                    <EtoroMark className="tenure-logo" />
+                    <div>
+                      <h3 className="tenure-role">
+                        Operations Center Manager → Operational Excellence Manager
+                      </h3>
+                      <p className="tenure-company tenure-company--etoro">
+                        eToro · Webiz International
+                      </p>
+                      <p className="tenure-context">
+                        NASDAQ-listed social trading platform (ETOR) · global consumer FinTech
+                      </p>
+                    </div>
+                  </header>
+                  <ul className="tenure-points">
+                    <li>
+                      Grew and led the 24/7 operations organization from <strong>6 to 30 FTE</strong>{' '}
+                      across NOC, SOC, and Professional Services — structured under three team
+                      leads, each owning a function with explicit escalation authority.
+                    </li>
+                    <li>
+                      Cut MTTA <strong>93%</strong> (17.3 → 1.2 min) and lifted First Line Resolution
+                      from 80% to 98% across 2,000+ monthly tickets and ~2,000 monthly monitoring
+                      alerts — materially reducing customer-facing downtime during peak trading.
+                    </li>
+                    <li>
+                      Shifted incident management from reactive to proactive — driving P0–P2
+                      detection from 1-of-6 to 10-of-12 events, with AI-assisted triage cutting
+                      manual workload <strong>60%</strong>.
+                    </li>
+                    <li>
+                      Founded and ran <strong>Georgia&rsquo;s first SOC bootcamp</strong> —
+                      converted cohort graduates into full-time eToro security operations hires,
+                      building a domestic talent pipeline where one didn&rsquo;t exist.
+                    </li>
+                    <li>
+                      Led regulatory incident handling via <strong>Professional Services</strong> —
+                      classification, escalation, and reporting under <strong>DORA</strong>,{' '}
+                      <strong>MiFID II</strong>, <strong>FCA</strong>, and <strong>CySEC</strong>,
+                      with <strong>SOX 404</strong> change-management discipline layered in
+                      following eToro&rsquo;s 2025 NASDAQ listing.
+                    </li>
+                  </ul>
+                </div>
+              </motion.li>
+
+              <motion.li
+                className="tenure-item"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-50px' }}
+                custom={3}
+                variants={fadeInUp}
+              >
+                <span className="tenure-marker" aria-hidden />
+                <div className="tenure-meta">
+                  <span className="tenure-dates">
+                    <Calendar size={12} aria-hidden /> Dec 2019 — Oct 2023
+                  </span>
+                  <span className="tenure-place">
+                    <MapPin size={12} aria-hidden /> Tbilisi, Georgia
+                  </span>
+                  <span className="tenure-tag">Promoted to Team Lead</span>
+                </div>
+                <div className="tenure-body">
+                  <header className="tenure-head">
+                    <EvolutionMark className="tenure-logo" />
+                    <div>
+                      <h3 className="tenure-role">
+                        Service Support Specialist → Service Support Team Lead
+                      </h3>
+                      <p className="tenure-company tenure-company--evolution">
+                        Evolution · iGaming
+                      </p>
+                      <p className="tenure-context">
+                        Global live-casino leader · Nasdaq Stockholm (EVO)
+                      </p>
+                    </div>
+                  </header>
+                  <ul className="tenure-points">
+                    <li>
+                      Managed a 12-person support team across four global locations in a 24/7
+                      iGaming environment — owning shift planning, quality calibration, and
+                      performance coaching.
+                    </li>
+                    <li>
+                      Led Tier 1 and Tier 2 escalations on VIP and regulator-sensitive incidents —
+                      ensuring compliant resolution across multiple licensed jurisdictions.
+                    </li>
+                    <li>
+                      Designed mentorship and QA programs that lifted first-level resolution rates{' '}
+                      <strong>30%</strong> across a 66-person support organization.
+                    </li>
+                    <li>
+                      Standardized 45+ operational workflows in Confluence — cutting onboarding
+                      time 25% and average ticket workload 40%.
+                    </li>
+                  </ul>
+                </div>
+              </motion.li>
+            </ol>
+          </div>
+        </section>
+
+        <section className="section section--alt" id="case-studies">
+          <div className="section-inner">
+            <SectionHeader
+              numeral="V"
+              label="Selected Work"
+              title="Two stories, the way I&rsquo;d tell them in the interview."
+              subtitle="Situation, hardest part, approach, outcome. The shape of a Director-level answer."
+            />
+
+            <div className="case-studies-stack">
+              {caseStudies.map((cs, i) => (
+                <motion.div
+                  key={cs.title}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-50px' }}
+                  custom={i + 1}
+                  variants={fadeInUp}
+                >
+                  <CaseStudyCard
+                    index={String(i + 1).padStart(2, '0')}
+                    title={cs.title}
+                    situation={cs.situation}
+                    hardestPart={cs.hardestPart}
+                    action={cs.action}
+                    result={cs.result}
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="regulatory">
+          <div className="section-inner">
+            <SectionHeader
+              numeral="VI"
+              label="Perimeter"
+              title="Regulatory frameworks I&rsquo;ve operated under."
+              subtitle="Not a list of acronyms I&rsquo;ve read — frameworks I&rsquo;ve filed, classified, escalated, and survived audit inside."
+            />
+            <RegulatoryWall />
+          </div>
+        </section>
+
+        <PullQuote attribution="On hiring an operations leader">
+          <em>
+            The job is to make sure the on-call engineer at 03:47 has the authority to stop the
+            line — and the system to do it inside a five-minute window.
+          </em>
+        </PullQuote>
+
+        <section className="section section--alt" id="skills">
+          <div className="section-inner">
+            <SectionHeader
+              numeral="VII"
+              label="Instruments"
+              title="Skills & tools."
+              subtitle="Core competencies across incident response, automation, and the regulatory and business fluency expected of senior operations leadership."
+            />
+
+            <div className="skills">
+              {skillCategories.map((cat, i) => (
+                <motion.div
+                  className="skills-category"
+                  key={cat.title}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-50px' }}
+                  custom={i + 1}
+                  variants={fadeInUp}
+                >
+                  <div className="skills-category-title">{cat.title}</div>
+                  <div className="skills-tags">
+                    {cat.skills.map((skill) => (
+                      <span className="skills-tag" key={skill}>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="projects">
+          <div className="section-inner">
+            <SectionHeader
+              numeral="VIII"
+              label="In Parallel"
+              title="Products I&rsquo;ve shipped alongside the day job."
+              subtitle="They sharpen the ops discipline with firsthand product, auth, billing, and deployment context."
+            />
+
+            <div className="projects-grid">
+              {projects.map((project, i) => (
+                <motion.article
+                  key={project.title}
+                  className="project"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-50px' }}
+                  custom={i + 1}
+                  variants={fadeInUp}
+                >
+                  <div className="project-head">
+                    <span className="project-index">
+                      {String(i + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+                    </span>
+                    <span className="project-badge">{project.badge}</span>
+                  </div>
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-subtitle">{project.subtitle}.</p>
+                  <p className="project-desc">{project.description}</p>
+                  <div className="project-tags">
+                    {project.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                  <a
+                    href={project.href}
+                    className="project-cta"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Visit {project.hrefLabel}</span>
+                    <ArrowUpRight size={14} aria-hidden />
+                  </a>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section section--alt" id="philosophy">
+          <div className="section-inner section-inner--narrow">
+            <SectionHeader
+              numeral="IX"
+              label="Operating"
+              title="How I run a room."
+              subtitle="Principles that guide how I build teams, systems, and accountability."
+            />
+
+            <motion.ol
+              className="creed"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+              custom={1}
+              variants={fadeInUp}
+            >
+              {leadershipPrinciples.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </motion.ol>
+          </div>
+        </section>
+
+        <section className="section" id="contact">
+          <div className="section-inner">
+            <SectionHeader
+              numeral="X"
+              label="Correspondence"
+              title="The line is open."
+              subtitle="Open to Director / Head of Operations roles in regulated FinTech and iGaming. Remote, or relocation for the right operation."
+            />
+
+            <div className="contact-grid">
+              <motion.a
+                href="/giga-kovaliovi-cv.pdf"
+                download
+                className="contact-item contact-item--feature"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={1}
+                variants={fadeInUp}
+              >
+                <span className="contact-label">
+                  <FileText size={11} aria-hidden /> CV · PDF
+                </span>
+                <span className="contact-value">Download dossier</span>
+                <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
+              </motion.a>
+
+              <motion.a
+                href="mailto:gigakovaliovi@gmail.com"
+                className="contact-item"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={2}
+                variants={fadeInUp}
+              >
+                <span className="contact-label">
+                  <Mail size={11} aria-hidden /> Email
+                </span>
+                <span className="contact-value">gigakovaliovi@gmail.com</span>
+                <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
+              </motion.a>
+
+              <motion.a
+                href="tel:+995591947168"
+                className="contact-item"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={3}
+                variants={fadeInUp}
+              >
+                <span className="contact-label">
+                  <Phone size={11} aria-hidden /> Direct Line
+                </span>
+                <span className="contact-value">+995 591 947 168</span>
+                <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
+              </motion.a>
+
+              <motion.a
+                href="https://linkedin.com/in/giga-kovaliovi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-item"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={4}
+                variants={fadeInUp}
+              >
+                <span className="contact-label">
+                  <LinkedinGlyph /> LinkedIn
+                </span>
+                <span className="contact-value">giga-kovaliovi</span>
+                <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
+              </motion.a>
+
+              <motion.a
+                href="https://github.com/gigakovaliovi16"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-item"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={5}
+                variants={fadeInUp}
+              >
+                <span className="contact-label">
+                  <GithubGlyph /> GitHub
+                </span>
+                <span className="contact-value">gigakovaliovi16</span>
+                <ArrowUpRight size={16} className="contact-arrow" aria-hidden />
+              </motion.a>
+
+              <div className="contact-item contact-item--passive">
+                <span className="contact-label">
+                  <MapPin size={11} aria-hidden /> Domicile
+                </span>
+                <span className="contact-value">Tbilisi, Georgia · GMT+4</span>
+                <span />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer className="colophon">
+          <div className="colophon-row">
+            <span className="colophon-mark">GK</span>
+            <span className="colophon-rule" aria-hidden />
+            <span className="colophon-copy">
+              © {new Date().getFullYear()} Giga Kovaliovi · All rights reserved
+            </span>
+          </div>
+          <div className="colophon-meta">
+            <span>Set in Fraunces, Inter Tight &amp; Geist Mono</span>
+            <span className="colophon-dot" aria-hidden />
+            <span>Hand-built in Tbilisi, MMXXVI</span>
+          </div>
+        </footer>
+      </main>
+    </>
   );
 }
 
